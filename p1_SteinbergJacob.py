@@ -1,5 +1,5 @@
-import the math module
-import matplotlib.pyplot
+import math
+import matplotlib.pyplot as plt
 
 while True:
   a_input = input("Enter coefficient a: ")
@@ -28,8 +28,8 @@ while True:
     x_max = x1 + 10
 
   else:
-    x1 = (-b + math.sqrt((D)) / (2*a)
-    x2 = (-b - math.sqrt((D)) / (2*a)
+    x1 = (-b + math.sqrt(D)) / (2*a)
+    x2 = (-b - math.sqrt(D)) / (2*a)
 
     print("two solutions:", x1, x2)
 
