@@ -14,7 +14,7 @@ while True:
 
   D = b**2 - 4*a*c
 
-  if D < ):
+  if D < 0:
     print("no real solutions")
 
     xopt = -b / (2*a)
