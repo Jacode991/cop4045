@@ -9,7 +9,7 @@ while True:
     break
 
   a = float(a_input)
-  b = float(input("Enter coeddicient b: "))
+  b = float(input("Enter coefficient b: "))
   c = float(input("Enter coefficient c: "))
 
   D = b**2 - 4*a*c
