@@ -37,10 +37,10 @@ while True:
 
 
     x_min = min(x1, x2) - 2
-    x-max = max(x1, x2) + 2
+    x_max = max(x1, x2) + 2
 
   number_of_points = 150
-  step = (x_max - x_min) / (number-of_points - 1)
+  step = (x_max - x_min) / (number_of_points - 1)
 
   x_values = []
   y_values = []
