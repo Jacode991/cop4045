@@ -1,4 +1,4 @@
-def find_P(n):
+def find_Pythagorean(n):
   triples = []
 
   for a in range(1, n + 1):
@@ -12,7 +12,7 @@ def find_P(n):
 
 n = int(input("Enter a positive integer n: "))
 
-result = find_P(n)
+result = find_Pythagorean(n)
 
 for triple in result:
   print(triple)
