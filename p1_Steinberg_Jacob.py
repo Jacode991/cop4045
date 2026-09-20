@@ -99,7 +99,7 @@ def parse_functions(filename: str) -> tuple:
     raise
 
 def main() -> None:
-  filename = "p1_Steinberg_Jacob
+  filename = "p1_Steinberg_Jacob.py"
   output_filename = "p1_Steinberg_Jacob_numbered.txt"
 
   print("Jacob Steinberg")
