@@ -14,9 +14,9 @@ def add_user(sn: dict,, username: str, fullname: str) -> bool:
     return True
 
   except Exception as error:
-    print("There was a problem adding the user.")
-    print(error)
-    raise
+      print("There was a problem adding the user.")
+      print(error)
+      raise
 
 def add_friend(sn: dict, user1: str, user2: str) -> bool:
   try:
