@@ -80,7 +80,7 @@ def save_network(filename: str, sn: dict) -> None:
     file.close()
 
   except Exception as error:
-      print(There was a problem saving the network.")
+      print("There was a problem saving the network.")
       print(error)
       raise
 
