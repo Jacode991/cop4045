@@ -5,34 +5,39 @@
 
 import csv
 
+
 def read_movie_list(filename: str) -> dict:
+    """Read a movie CSV file and return the movies in a dictionary."""
     try:
-      movies = {}
+        movies = {}
 
-      file = open(filename, "r", encoding="utf-8")
-      reader = csv.reader(file)
+        file = open(filename, "r", encoding="utf-8")
+        reader = csv.reader(file)
 
-      next(reader)
+        # Skip the heading
+        next(reader)
 
-      for row in reader:
-          title = row[1]
-          year = row[2]
-          value = row[3]
+        for row in reader:
+            title = row[1]
+            year = row[2]
+            value = row[3]
 
-          movies[(title, year)] = value
+            movies[(title, year)] = value
 
-      file.close()
-      return movies
+        file.close()
+        return movies
 
     except Exception as error:
-      print("There was a problem reading", filename)
-      print(error)
-      raise
+        print("There was a problem reading", filename)
+        print(error)
+        raise
+
 
 def read_casts(filename: str) -> dict:
+    """Read the cast file and return the movie information in a dictionary."""
     try:
         casts = {}
-          
+
         file = open(filename, "r", encoding="utf-8")
         reader = csv.reader(file)
 
@@ -52,10 +57,11 @@ def read_casts(filename: str) -> dict:
         print(error)
         raise
 
+
 def display_top_collaborations(rated_file: str,
                                cast_file: str,
                                limit=None) -> None:
-
+    """Display director and actor collaborations for top rated movies."""
     try:
         rated_movies = read_movie_list(rated_file)
         casts = read_casts(cast_file)
@@ -63,17 +69,17 @@ def display_top_collaborations(rated_file: str,
         collaborations = {}
 
         for movie in rated_movies:
-          if movie in casts:
-              director = casts[movie][0]
-              actors = casts[movie][1]
+            if movie in casts:
+                director = casts[movie][0]
+                actors = casts[movie][1]
 
-              for actor in actors:
-                  pair = (director, actor)
+                for actor in actors:
+                    pair = (director, actor)
 
-                  if pair in collaborations:
-                      collaborations[pair] += 1
-                  else:
-                      collaborations[pair] = 1
+                    if pair in collaborations:
+                        collaborations[pair] += 1
+                    else:
+                        collaborations[pair] = 1
 
         ranking = []
 
@@ -84,10 +90,50 @@ def display_top_collaborations(rated_file: str,
 
             ranking.append((director, actor, count))
 
-        ranking.sort(key=lambda item: item[2], revers=True)
+        ranking.sort(key=lambda item: item[2], reverse=True)
 
         if limit is not None:
-          ranking = ranking[:limit]
+            ranking = ranking[:limit]
+
+        for item in ranking:
+            print(item)
+
+    except Exception as error:
+        print("There was a problem displaying the collaborations.")
+        print(error)
+        raise
+
+
+def display_top_actors(grossing_file: str,
+                       cast_file: str,
+                       limit=None) -> None:
+    """Display actors ranked by their total box office money."""
+    try:
+        grossing_movies = read_movie_list(grossing_file)
+        casts = read_casts(cast_file)
+
+        actor_totals = {}
+
+        for movie in grossing_movies:
+            if movie in casts:
+                box_office = int(grossing_movies[movie])
+                actors = casts[movie][1]
+
+                for actor in actors:
+                    if actor in actor_totals:
+                        actor_totals[actor] += box_office
+                    else:
+                        actor_totals[actor] = box_office
+
+        ranking = []
+
+        for actor in actor_totals:
+            ranking.append((actor, actor_totals[actor]))
+
+        ranking.sort(key=lambda item: item[1], reverse=True)
+
+        if limit is not None:
+            ranking = ranking[:limit]
 
         for item in ranking:
             print(item)
@@ -97,7 +143,9 @@ def display_top_collaborations(rated_file: str,
         print(error)
         raise
 
-def main() - None:
+
+def main() -> None:
+    """Test the functions for Homework 2 Problem 4."""
 
     print("Jacob Steinberg")
     print("COP 4045 - Homework 2 - Problem 4")
@@ -115,8 +163,8 @@ def main() - None:
 
     print("Part B - Top Actors by Total Box Office")
     print("---------------------------------------")
-    display_top_actors(grossing_file, cast-file, 10)
+    display_top_actors(grossing_file, cast_file, 10)
+
 
 if __name__ == "__main__":
     main()
-  
