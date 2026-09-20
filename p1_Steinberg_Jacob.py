@@ -67,6 +67,7 @@ def parse_functions(filename: str) -> tuple:
             continue
 
           if current_line.lstrip().startswith("#"):
+            i += 1
             continue
 
           if "#" in current_line:
@@ -77,11 +78,11 @@ def parse_functions(filename: str) -> tuple:
           function_code += current_line
           i += 1
 
-        function_info = (
-          line_num,
-          function_name,
-          arguments,
-          fuction_code
+          function_info = (
+            line_num,
+            function_name,
+            arguments,
+            function_code
         )
 
         functions.append(function_info)
@@ -116,14 +117,13 @@ def main() -> None:
   #Part B
   print("Part B")
 
-  result = parse_functions(filename):
+  result = parse_functions(filename)
   print("Functions found:", len(result))
 
   for function in result:
-    print(fuction)
+    print(function)
     print()
 
 if __name__ == "__main__":
   main()
   
-          
