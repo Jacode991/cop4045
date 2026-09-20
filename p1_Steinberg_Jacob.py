@@ -5,14 +5,14 @@
 
 def line_number(input_filename: str, output_filename: str) -> None:
   try:
-    inpfile = open(input_filename, "r")
+    infile = open(input_filename, "r")
     outfile = open(output_filename, "w")
 
     number = 1
 
     for line in infile:
       outfile.write(str(number) + ". " + line)
-      line_num += 1
+      number += 1
 
     infile.close()
     outfile.close()
