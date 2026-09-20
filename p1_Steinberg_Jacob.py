@@ -116,7 +116,8 @@ def main() -> None:
   #Part B
   print("Part B")
 
-  result = parse_functions(filename)
+  result = parse_functions(filename):
+  print("Functions found:", len(result))
 
   for function in result:
     print(fuction)
