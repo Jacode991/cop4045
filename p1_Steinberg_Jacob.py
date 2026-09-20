@@ -55,7 +55,7 @@ def parse_functions(filename: str) -> tuple:
           if lines[i].startswith("def"):
             break
 
-          if (lines[i].strip() != "":
+          if (lines[i].strip() != ""
                 and not lines[i][0].isspace()
                 and not lines[i].startswith("#")):
             break
@@ -89,7 +89,7 @@ def parse_functions(filename: str) -> tuple:
       else:
         i += 1
 
-    functions.sort(key=lamdba x: x[1])
+    functions.sort(key=lambda x: x[1])
 
     return tuple(functions)
 
