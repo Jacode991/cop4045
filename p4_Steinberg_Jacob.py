@@ -48,7 +48,7 @@ def read_casts(filename: str) -> dict:
         return casts
 
     except Exception as error:
-        print(There was a problem reading", filename)
+        print("There was a problem reading", filename)
         print(error)
         raise
 
