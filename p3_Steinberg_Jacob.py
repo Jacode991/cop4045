@@ -6,17 +6,17 @@
 import csv
 
 def add_user(sn: dict,, username: str, fullname: str) -> bool:
-  try:
-    if username in sn:
-      return False
+    try:
+      if username in sn:
+        return False
 
-    sn[username] = (fullname, [])
-    return True
+      sn[username] = (fullname, [])
+      return True
 
-  except Exception as error:
-      print("There was a problem adding the user.")
-      print(error)
-      raise
+    except Exception as error:
+        print("There was a problem adding the user.")
+        print(error)
+        raise
 
 def add_friend(sn: dict, user1: str, user2: str) -> bool:
   try:
