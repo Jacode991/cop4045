@@ -5,7 +5,7 @@
 
 import csv
 
-def add_user(sn: dict,, username: str, fullname: str) -> bool:
+def add_user(sn: dict, username: str, fullname: str) -> bool:
     try:
       if username in sn:
         return False
