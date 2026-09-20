@@ -55,7 +55,7 @@ def get_friends(sn: dict, user1: str, distance: int) -> list:
 
       current_level = next_level
 
-      if len(current_level) == 0
+      if len(current_level) == 0:
           break
 
     return friends_found
