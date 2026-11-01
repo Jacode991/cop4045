@@ -122,4 +122,4 @@ class FacultyPermint(ParkingPermit):
         print(f"\nTotal revenue: ${revenue:.2f}")
 
     if __name__ == "__main__":
-    main()
+        main()
