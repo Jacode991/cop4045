@@ -89,21 +89,16 @@ class FacultyPermint(ParkingPermit):
         )
 
 def summarize_list(permits: list[ParkingPermit]) -> float:
-    """Print the owner and cost of every permit; return total revenue.
-
-    Parameter: permits is a list containing student and faculty permits.
-    Postcondition: each permit is printed using its __str__ method.
-    """
-    total = 0.0
+    """Print each permit owner's name and cost; return total revenue."""
+    revenue = 0.0
     for permit in permits:
-        print(permit)
-        total += permit.cost()
-    return total
+        print(str(permit))
+        revenue += permit.cost()
+    return revenue
 
 
 def main() -> None:
-    """Demonstrate the classes, their representations, and revenue totals."""
-    # Prices are supplied through this dictionary, not inside cost methods.
+    """Create sample permits and display representations and total costs."""
     fees = {
         "student_monthly": 25.0,
         "extra_vehicle": 10.0,
@@ -118,14 +113,12 @@ def main() -> None:
         FacultyPermit("Prof. Rivera", 1, fees, False),
     ]
 
-    student_id = input("Enter your FAU student ID for the screenshot: ").strip()
-    print(f"\nFAU Student ID: {student_id or '[not entered]'}")
-
-    print("\nObject representations (__repr__):")
+    print("FAU Student ID: z23812823")
+    print("\nObject representations:")
     for permit in permits:
         print(repr(permit))
 
-    print("\nParking permits and calculated costs (__str__):")
+    print("\nPermit costs:")
     revenue = summarize_list(permits)
     print(f"\nTotal revenue: ${revenue:.2f}")
 
