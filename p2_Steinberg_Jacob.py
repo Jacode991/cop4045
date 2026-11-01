@@ -95,7 +95,7 @@ class FacultyPermint(ParkingPermit):
             total += permit.cost()
         return total
 
-    def main() -> None:
+   def main() -> None:
         fees = {
             "student_monthly": 25.0,
             "extra_vehicle": 10.0,
@@ -110,8 +110,8 @@ class FacultyPermint(ParkingPermit):
             FacultyPermit("Prof. Rivera", 1, fees, False),
         ]
 
-        student_id = input("Enter your FAU Student ID for the screenshot: ").strip()
-        print(f"\FAU Student ID: {student_id or '[not entered]'}")
+        student_id = input("Enter your FAU student ID for the screenshot: ").strip()
+        print(f"\nFAU Student ID: {student_id or '[not entered]'}")
 
         print("\nObject representations (__repr__):")
         for permit in permits:
@@ -120,6 +120,7 @@ class FacultyPermint(ParkingPermit):
         print("\nParking permits and calculated costs (__str__):")
         revenue = summarize_list(permits)
         print(f"\nTotal revenue: ${revenue:.2f}")
+
 
     if __name__ == "__main__":
         main()
