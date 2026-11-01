@@ -88,39 +88,47 @@ class FacultyPermint(ParkingPermit):
             f"{self.fee_schedule!r}, {self.garage_access!r})"
         )
 
-    def summerize_list(permits: list [ParkingPermit]) -> float:
-        total = 0.0
-        for permit in permits:
-            print(permit)
-            total += permit.cost()
-        return total
+def summarize_list(permits: list[ParkingPermit]) -> float:
+    """Print the owner and cost of every permit; return total revenue.
 
-   def main() -> None:
-        fees = {
-            "student_monthly": 25.0,
-            "extra_vehicle": 10.0,
-            "faculty_monthly": 40.0,
-            "garage_monthly": 15.0,
-        }
-
-        permits: list[ParkingPermit] = [
-            StudentPermit("Alex Carter", 4, fees, 2),
-            StudentPermit("Taylor Lee", 2, fees, 1),
-            FacultyPermit("Dr. Morgan", 3, fees, True),
-            FacultyPermit("Prof. Rivera", 1, fees, False),
-        ]
-
-        student_id = input("Enter your FAU student ID for the screenshot: ").strip()
-        print(f"\nFAU Student ID: {student_id or '[not entered]'}")
-
-        print("\nObject representations (__repr__):")
-        for permit in permits:
-            print(repr(permit))
-
-        print("\nParking permits and calculated costs (__str__):")
-        revenue = summarize_list(permits)
-        print(f"\nTotal revenue: ${revenue:.2f}")
+    Parameter: permits is a list containing student and faculty permits.
+    Postcondition: each permit is printed using its __str__ method.
+    """
+    total = 0.0
+    for permit in permits:
+        print(permit)
+        total += permit.cost()
+    return total
 
 
-    if __name__ == "__main__":
-        main()
+def main() -> None:
+    """Demonstrate the classes, their representations, and revenue totals."""
+    # Prices are supplied through this dictionary, not inside cost methods.
+    fees = {
+        "student_monthly": 25.0,
+        "extra_vehicle": 10.0,
+        "faculty_monthly": 40.0,
+        "garage_monthly": 15.0,
+    }
+
+    permits: list[ParkingPermit] = [
+        StudentPermit("Alex Carter", 4, fees, 2),
+        StudentPermit("Taylor Lee", 2, fees, 1),
+        FacultyPermit("Dr. Morgan", 3, fees, True),
+        FacultyPermit("Prof. Rivera", 1, fees, False),
+    ]
+
+    student_id = input("Enter your FAU student ID for the screenshot: ").strip()
+    print(f"\nFAU Student ID: {student_id or '[not entered]'}")
+
+    print("\nObject representations (__repr__):")
+    for permit in permits:
+        print(repr(permit))
+
+    print("\nParking permits and calculated costs (__str__):")
+    revenue = summarize_list(permits)
+    print(f"\nTotal revenue: ${revenue:.2f}")
+
+
+if __name__ == "__main__":
+    main()
