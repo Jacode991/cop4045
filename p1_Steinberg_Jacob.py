@@ -25,7 +25,7 @@ class NVector:
           if isinstance(value, bool) or not isinstance(value, Real):
               raise TypeError("Vector elements must be real numbers")
 
-    def __len__(self) _> int:
+    def __len__(self) -> int:
         return len(self.elements)
 
     def __getitem__(self, index: int) -> Real:
