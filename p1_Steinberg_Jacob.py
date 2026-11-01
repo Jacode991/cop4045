@@ -58,7 +58,7 @@ class NVector:
         return self.__add__(other)
 
     def __mul__(self, other: NVector | Real) -> Real | NotImplementedType:
-      if isinstance(other, NVector):
+        if isinstance(other, NVector):
             if len(self) != len(other):
                 raise ValueError("Vector dimensions must match")
             return sum(a * b for a, b in zip(self.elements, other.elements))
