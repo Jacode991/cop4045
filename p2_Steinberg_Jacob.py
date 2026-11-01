@@ -44,3 +44,20 @@ class StudentPermit(ParkingPermit):
         if type(vehicles) is not int or vehicles <= 0:
             raise ValueError("Vehicles must be a positive integer.")
         self.vehicles = vehicles
+
+    def cost(self) -> float:
+        monthly_fee = self.fee_schedule["student_monthly"]
+        extra_vehicle_fee = self.fee_schedule["extra_vehicle"]
+        return float(self.months * monthly_fee + (self.vehicles - 1) * extra_vehicle_fee)
+
+    def __str__(self) -> str:
+        return (
+            f"Student: {self.owner} | Months: {self.months} | "
+            f"Vehicles: {self.vehicles} | Cost: ${self.cost():.2f}"
+        )
+
+    def __repr__(self) -> str:
+        return (
+            f"StudentPermit({self.owner!r}, {self.months!r}, "
+            f"{self.fee_schedule!r}, {self.vehicles!r})"
+        )
