@@ -61,3 +61,65 @@ class StudentPermit(ParkingPermit):
             f"StudentPermit({self.owner!r}, {self.months!r}, "
             f"{self.fee_schedule!r}, {self.vehicles!r})"
         )
+
+
+class FacultyPermint(ParkingPermit):
+    def __init__(
+        self,
+        owner: str,
+        months: int,
+        fee_schedule: dict[str, float],
+        garage_access: bool,
+    ) -> None:
+        super().__init__(owner, months, fee_schedule)
+        if not isinstance(garage_access, bool):
+            raise TypeError("Garage access must be True or False.")
+        self.garage_access = garage_access
+
+    def cost(self) -> float:
+        monthly_fee = self.fee_schedule["faculty_monthly"]
+        garage_fee = self.fee_schedle["garage_monthly"] if self.garage_access else 0
+        return float(self.months * (monthly_fee + garage_fee))
+
+    def __str__(self) -> str:
+        garage = "Yes" if self.garage_access else "No"
+        return (
+            f"FacultyPermit({self.owner!r}, {self.months!r}, "
+            f"{self.fee_schedule!r}, {self.garage_access!r})"
+        )
+
+    def summerize_list(permits: list [ParkingPermit]) -> float:
+        total = 0.0
+        for permit in permits:
+            print(permit)
+            total += permit.cost()
+        return total
+
+    def main() -> None:
+        fees = {
+            "student_monthly": 25.0,
+            "extra_vehicle": 10.0,
+            "faculty_monthly": 40.0,
+            "garage_monthly": 15.0,
+        }
+
+        permits: list[ParkingPermit] = [
+            StudentPermit("Alex Carter", 4, fees, 2),
+            StudentPermit("Taylor Lee", 2, fees, 1),
+            FacultyPermit("Dr. Morgan", 3, fees, True),
+            FacultyPermit("Prof. Rivera", 1, fees, False),
+        ]
+
+        student_id = input("Enter your FAU Student ID for the screenshot: ").strip()
+        print(f"\FAU Student ID: {student_id or '[not entered]'}")
+
+        print("\nObject representations (__repr__):")
+        for permit in permits:
+            print(repr(permit))
+
+        print("\nParking permits and calculated costs (__str__):")
+        revenue = summarize_list(permits)
+        print(f"\nTotal revenue: ${revenue:.2f}")
+
+    if __name__ == "__main__":
+    main()
