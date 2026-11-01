@@ -25,10 +25,10 @@ class ParkingPermit:
     def __str__(self) -> str:
         return f"Parking permit for {self.owner} ({self.months} months)"
 
-    def __repr__(self) -> str:
+     def __repr__(self) -> str:
         return (
             f"ParkingPermit({self.owner!r}, {self.months!r}, "
-            f"{self.fee_schedule!r}
+            f"{self.fee_schedule!r})"
         )
 
 
