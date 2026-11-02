@@ -83,7 +83,7 @@ class Animal:
 
     breed_time: int
 
-    def __init__(self, island: Island, x: int = 0, y: int = 0<
+    def __init__(self, island: Island, x: int = 0, y: int = 0,
                  s: str = "A") -> None:
 
         self.island = island
