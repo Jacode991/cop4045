@@ -55,7 +55,7 @@ class Island:
             self.grid[animal.x][animal.y] = 0
 
     def animal(self, x: int, y: int) -> Animal | int:
-        if 0 <= x < self.grid_size and ) <= y < self.grid_size:
+        if 0 <= x < self.grid_size and 0 <= y < self.grid_size:
             return self.grid[x][y]
         return -1
 
