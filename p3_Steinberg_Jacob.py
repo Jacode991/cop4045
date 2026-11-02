@@ -12,7 +12,7 @@ class Island:
     def __init__(self, n: int, prey_count: int = 0,
                  predator_count: int = 0, count_humans: int = 0) -> None:
 
-        if n <= 0 or min(prey_count, preadator_count, count_humans) < 0:
+        if n <= 0 or min(prey_count, predator_count, count_humans) < 0:
             raise ValueError("Island size must be positive and counts nonnegative.")
         if prey_count + predator_count + count_humans > n * n:
             raise ValueError("Too many animals for the island.")
@@ -173,7 +173,7 @@ class Predator(Animal):
         if self.starve_clock <= 0:
             self.island.remove(self)
 
-    def eat(self) - None:
+    def eat(self) -> None:
         if self. capture_neighbor(Prey):
             self.starve_clock = self.starve_time
 
