@@ -61,7 +61,7 @@ class Island:
 
     def __str__(self) -> str:
         lines = []
-        for y in range(self.grind_size - 1, -1, -1):
+        for y in range(self.grid_size - 1, -1, -1):
             row = []
             for x in range(self.grid_size):
                 current = self.grid[x][y]
@@ -120,7 +120,7 @@ class Animal:
                 self.moved = True
 
     def breed(self) -> None:
-        if self.bread_clock <= 0:
+        if self.breed_clock <= 0:
             location = self.check_grid(int)
             if location is not None:
                 self.breed_clock = self.breed_time
