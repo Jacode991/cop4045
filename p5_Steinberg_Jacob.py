@@ -5,6 +5,106 @@
 # Problem 5 - Recursion
 
 
+import math
+import turtle
+
+
+def testif(condition: bool, description: str) -> None:
+    if condition:
+        print("PASS:", description)
+    else:
+        print("FAIL:", description)
+
+
+# Part A: Drawing the leaves
+
+def leaf_point(x: float, y: float, length: float, width: float,
+               bend: float, height: float, side: int) -> tuple[float, float]:
+    center_x = x + bend * height * height
+    edge_x = side * width * math.sin(math.pi * height)
+    return center_x + edge_x, y + length * height
+
+
+def draw_veins(level: int, start: float, end: float, x: float,
+               y: float, length: float, width: float, bend: float) -> None:
+    if level == 0:
+        return
+
+    middle = (start + end) / 2
+    center = leaf_point(x, y, length, width, bend, middle, 0)
+    edge_height = min(middle + 0.05, 1.0)
+    for side in (-1, 1):
+        edge = leaf_point(x, y, length, width, bend, edge_height, side)
+        turtle.penup()
+        turtle.goto(center)
+        turtle.pendown()
+        turtle.goto(edge)
+
+    draw_veins(level - 1, start, middle, x, y, length, width, bend)
+    draw_veins(level - 1, middle, end, x, y, length, width, bend)
+
+
+def draw_leaf(level: int, stem: float, x: float, bend: float) -> None:
+    if level < 1 or stem <= 0:
+        raise ValueError("Level and stem length must be positive")
+
+    y = -130.0
+    blade_length = 225.0
+    width = 85.0
+    steps = 40
+
+    turtle.hideturtle()
+    turtle.speed(0)
+    turtle.pencolor("darkgreen")
+
+    turtle.penup()
+    turtle.goto(x, y - stem)
+    turtle.setheading(90)
+    turtle.pendown()
+    turtle.pensize(4)
+    turtle.goto(x, y)
+
+    turtle.pensize(2)
+    turtle.fillcolor("lightgreen")
+    turtle.begin_fill()
+    for i in range(steps + 1):
+        point = leaf_point(x, y, blade_length, width, bend, i / steps, 1)
+        turtle.goto(point)
+    for i in range(steps, -1, -1):
+        point = leaf_point(x, y, blade_length, width, bend, i / steps, -1)
+        turtle.goto(point)
+    turtle.end_fill()
+
+    turtle.pensize(3)
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+    for i in range(1, steps + 1):
+        point = leaf_point(x, y, blade_length, width, bend, i / steps, 0)
+        turtle.goto(point)
+
+    turtle.pensize(1)
+    draw_veins(min(level, 4), 0.05, 0.95,
+               x, y, blade_length, width, bend)
+    turtle.penup()
+
+
+def draw_leaf_straight(level: int, stem: float) -> None:
+    draw_leaf(level, stem, -225.0, 0.0)
+
+
+def draw_leaf_curved(level: int, stem: float) -> None:
+    draw_leaf(level, stem, 175.0, 85.0)
+
+
+# Part B: Recursive conversion to a number base
+
+def strB(n: int, base: int = 10) -> str:
+    if n < 0 or not 2 <= base <= 26:
+        raise ValueError("n must be nonnegative and base must be 2 to 26")
+
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if n < base:
         return digits[n]
     return strB(n // base, base) + digits[n % base]
 
@@ -21,10 +121,6 @@ def test_strB() -> None:
 
 def Cnk_m(n: int, k: int,
           memo: dict[tuple[int, int], int] | None = None) -> int:
-    """Return n choose k using recursion and a dictionary cache.
-
-    Preconditions: 0 <= k <= n. The memo dictionary saves earlier results.
-    """
     if n < 0 or k < 0 or k > n:
         raise ValueError("Require 0 <= k <= n")
 
@@ -43,7 +139,6 @@ def Cnk_m(n: int, k: int,
 
 
 def test_Cnk_m() -> None:
-    """Run four tests for the memoized binomial coefficient."""
     testif(Cnk_m(5, 2) == 10, "5 choose 2")
     testif(Cnk_m(8, 3) == 56, "8 choose 3")
     testif(Cnk_m(10, 5) == 252, "10 choose 5")
@@ -51,7 +146,6 @@ def test_Cnk_m() -> None:
 
 
 def run_Cnk(n: int = 30, k: int = 15) -> None:
-    """Display an example result from the memoized Cnk_m function."""
     print(f"Cnk_m({n}, {k}) = {Cnk_m(n, k)}")
 
 
@@ -60,10 +154,6 @@ def run_Cnk(n: int = 30, k: int = 15) -> None:
 def make_pairs(seq1: list, seq2: list,
                pairs: list[tuple] | None = None,
                index: int = 0) -> list[tuple]:
-    """Pair matching indexes, stopping at the shorter list.
-
-    The pairs list is an accumulator passed into each recursive call.
-    """
     if pairs is None:
         pairs = []
 
@@ -75,7 +165,6 @@ def make_pairs(seq1: list, seq2: list,
 
 
 def test_make_pairs() -> None:
-    """Run five tests, including cases with empty lists."""
     testif(make_pairs([1, 2], [3, 4]) == [(1, 3), (2, 4)],
            "Lists of equal length")
     testif(make_pairs([1], [3, 4]) == [(1, 3)],
@@ -87,7 +176,6 @@ def test_make_pairs() -> None:
 
 
 def main() -> None:
-    """Run the required tests and display both recursive leaf drawings."""
     print("Jacob Steinberg")
     print("FAU Student ID: z23812823")
     print("COP 4045 - Problem 5")
@@ -128,4 +216,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
