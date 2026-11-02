@@ -82,6 +82,17 @@ def draw_leaf(level: int, stem: float, x: float, bend: float) -> None:
               return digits[n]
     return strB(n // base, base) + digits[n % base]
 
+def strB(n: int, base: int = 10) -> str:
+    """Convert a nonnegative integer to a different base using recursion."""
+    if n < 0 or base < 2 or base > 26:
+        raise ValueError("Invalid number or base")
+
+    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    if n < base:
+        return digits[n]
+
+    return strB(n // base, base) + digits[n % base]
 
 def test_strB() -> None:
     """Run four tests for the recursive base conversion."""
