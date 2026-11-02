@@ -73,3 +73,30 @@ def find_large_files(entry: Entry, minimum_size: int) -> list[File]:
         return matches
 
     return []
+
+def test_file_system() -> None:
+    """Test folder sizes, parent paths, and recursive file searching."""
+    root = Folder("root")
+    documents = Folder("documents")
+    small_file = File("notes.txt", 100)
+    large_file = File("report.pdf", 500)
+
+    root.add(documents)
+    root.add(small_file)
+    documents.add(large_file)
+
+    assert small_file.size() == 100
+    assert documents.size() == 500
+    assert root.size() == 600
+    assert large_file.parent() is documents
+    assert documents.children() == (large_file,)
+    assert large_file.absolute_path() == [large_file, documents, root]
+    assert find_large_files(root, 300) == [large_file]
+    assert find_large_files(root, 600) == []
+
+    print("All tests passed!")
+
+
+if __name__ == "__main__":
+    test_file_system()
+
