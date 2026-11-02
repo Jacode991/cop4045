@@ -165,7 +165,7 @@ class Predator(Animal):
     def __init__(self, island: Island, x: int = 0, y: int = 0,
                  s: str = "X") -> None:
         super().__init__(island, x, y, s)
-        self.starve_clock = self.starvve_time
+        self.starve_clock = self.starve_time
 
     def clock_tick(self) -> None:
         self.breed_clock -= 1
