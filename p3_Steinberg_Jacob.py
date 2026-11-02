@@ -26,8 +26,8 @@ class Island:
     def init_animals(self, prey_count: int, predator_count: int,
                      count_humans: int) -> None:
 
-        for animal_class, count in ((prey, prey_count),
-                                    (predator, predator_count),
+        for animal_class, count in ((Prey, prey_count),
+                                    (Predator, predator_count),
                                     (Human, count_humans)):
             placed = 0
             while placed < count:
