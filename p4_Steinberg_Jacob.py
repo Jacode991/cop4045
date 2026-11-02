@@ -84,12 +84,16 @@ def ed_replace(filename: str, search_str: str,
 
     return count
 
-filename = "file1.txt"
+def ed_append(filename: str, string: str) -> int:
+    """Append text to a file and return the number of characters added.
 
-print(ed_append(filename, "0123456789"))
-print(ed_append(filename, "0123456789"))
+    The file is created if it does not exist.
+    The existing text is preserved.
+    """
+    with open(filename, "a", encoding="utf-8") as file:
+        file.write(string)
 
-print(ed_read(filename))
+    return len(string)
 
 
 import os
